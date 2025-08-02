@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📚 Get Textbooks Grade 1-8</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f9f9f9;
+      padding: 30px;
+    }
+    button, select {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 6px;
+      border: 1px solid #007b5e;
+      background: #007b5e;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover:not([disabled]), select:hover { background: #005f46; }
+    button[disabled] { background: #999; cursor: not-allowed; }
+    .subject-links { margin-top: 20px; }
+    .subject-links a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      background: #007b5e;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .subject-links a:hover { background: #005f46; }
+    .ads-section {
+      margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ddd;
+    }
+    .ads-section img {
+      width: 150px;
+      margin: 10px;
+      border-radius: 5px;
+      transition: transform 0.2s;
+    }
+    .ads-section img:hover { transform: scale(1.05); }
+  </style>
+</head>
+<body>
+
+<h1>📚 Get Textbooks Grade 1‑8</h1>
+<button id="showGradesBtn">Click here to Get Textbooks From Grade 1‑8</button>
+<div id="gradeSelector" style="display:none; margin-top:20px;">
+  <select id="gradeSelect">
+    <option value="">-- Select Your Grade --</option>
+    <option value="grade1">Grade 1</option>
+    <option value="grade2">Grade 2</option>
+    <option value="grade3">Grade 3</option>
+    <option value="grade4">Grade 4</option>
+    <option value="grade5">Grade 5</option>
+    <option value="grade6">Grade 6</option>
+    <option value="grade7">Grade 7</option>
+    <option value="grade8">Grade 8</option>
+  </select>
+</div>
+<div id="subjects" class="subject-links"></div>
+
+<div class="ads-section">
+  <h2>Sponsored Ads</h2>
+  <a href="https://feastables.com" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Feastables_Logo.png" alt="MrBeast Chocolate">
+  </a>
+  <a href="https://www.alibaba.com" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Alibaba_Group_logo.svg" alt="Alibaba">
+  </a>
+  <a href="https://chat.openai.com" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" alt="ChatGPT">
+  </a>
+  <a href="https://www.walmart.com" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg" alt="Walmart">
+  </a>
+</div>
+
+<script>
+const showGradesBtn=document.getElementById('showGradesBtn'),
+      gradeSelector=document.getElementById('gradeSelector'),
+      gradeSelect=document.getElementById('gradeSelect'),
+      subjectsDiv=document.getElementById('subjects');
+
+const textbooks={
+  grade1:{
+    English:'https://fetena.net/books_asset/books_32/collection/grade%201-english_fetena_net_890a.pdf',
+    Amharic:'https://fetena.net/books_asset/books_32/collection/grade%201-amharic_fetena_net_890a.pdf',
+    Mathematics:'https://fetena.net/books_asset/books_32/collection/grade%201-mathematics_fetena_net_890a.pdf',
+    'Environmental Science':'https://fetena.net/books_asset/books_32/collection/grade%201-environmental‑science_fetena_net_890a.pdf'
+  },
+  grade2:{
+    English:'https://fetena.net/books_asset/books_33/collection/grade%202-english_fetena_net_584a.pdf',
+    Amharic:'https://fetena.net/books_asset/books_33/collection/grade%202-amharic_fetena_net_584a.pdf',
+    Mathematics:'https://fetena.net/books_asset/books_33/collection/grade%202-mathematics_fetena_net_584a.pdf',
+    'Environmental Science':'https://fetena.net/books_asset/books_33/collection/grade%202-environmental‑science_fetena_net_584a.pdf'
+  },
+  grade6:{
+    English:'https://fetena.net/books_asset/books_31/collection/grade%206-english_fetena_net_d4b3.pdf',
+    Amharic:'https://fetena.net/books_asset/books_31/collection/grade%206-amharic_fetena_net_a9f0.pdf',
+    Mathematics:'https://fetena.net/books_asset/books_31/collection/grade%206-mathematics_fetena_net_9cbd.pdf',
+    'Environmental Science':'https://fetena.net/books_asset/books_31/collection/grade%206-environmental%20science_fetena_net_c906.pdf'
+  },
+  grade8:{
+    English:'https://fetena.net/books_asset/books_24/collection/grade%208-english_fetena_net_9e40.pdf',
+    Mathematics:'https://fetena.net/books_asset/books_24/collection/grade%208-mathematics_fetena_net_8bd2.pdf',
+    'General Science':'https://fetena.net/books_asset/books_24/collection/grade%208-general%20science_fetena_net_724c.pdf',
+    'Social Studies':'https://fetena.net/books_asset/books_24/collection/grade%208-social%20studies_fetena_net_1dc2.pdf'
+  }
+};
+
+showGradesBtn.addEventListener('click',()=>{
+  gradeSelector.style.display='block';
+  showGradesBtn.style.display='none';
+});
+
+gradeSelect.addEventListener('change',()=>{
+  const g=gradeSelect.value;
+  subjectsDiv.innerHTML='';
+  if(g && textbooks[g]){
+    const subs=textbooks[g];
+    Object.entries(subs).forEach(([sub,link])=>{
+      const a=document.createElement('a');
+      a.href=link; a.target='_blank'; a.rel='noopener noreferrer';
+      a.textContent=sub;
+      subjectsDiv.appendChild(a);
+    });
+  } else if(g){
+    const msg=document.createElement('p');
+    msg.textContent='Textbooks for this grade are coming soon.';
+    subjectsDiv.appendChild(msg);
+    ['English','Amharic','Mathematics','Environmental Science'].forEach(sub=>{
+      const b=document.createElement('button');
+      b.textContent=sub; b.disabled=true; subjectsDiv.appendChild(b);
+    });
+  }
+});
+</script>
+</body>
+</html>
